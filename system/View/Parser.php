@@ -293,6 +293,12 @@ class Parser extends View
             // Loop over each piece of $data, replacing
             // its contents so that we know what to replace in parse()
             $str = '';  // holds the new contents for this tag pair.
+            
+            // If data is not a list of elements, convert single item to a list
+            $is_list = $data === [] || (array_keys($data) === range(0, count($data) - 1));
+            if (!$is_list){
+                $data = [$data];
+            }
 
             foreach ($data as $row) {
                 // Objects that have a `toArray()` method should be
